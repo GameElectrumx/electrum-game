@@ -2,9 +2,9 @@
 
 # Parameterize
 PYTHON_VERSION=3.6.4
-BUILDDIR=/tmp/electrum-ltc-build
-PACKAGE=Electrum-LTC
-GIT_REPO=https://github.com/pooler/electrum-ltc
+BUILDDIR=/tmp/electrum-game-build
+PACKAGE=Electrum-GAME
+GIT_REPO=https://github.com/samadsajanlal/electrum-game
 LIBSECP_VERSION=452d8e4d2a2f9f1b5be6b02e18f1ba102e5ca0b4
 
 . $(dirname "$0")/base.sh
@@ -46,8 +46,8 @@ git submodule update
 rm  -rf $BUILDDIR > /dev/null 2>&1
 mkdir $BUILDDIR
 
-cp -R ./contrib/deterministic-build/electrum-ltc-locale/locale/ ./electrum_ltc/locale/
-cp    ./contrib/deterministic-build/electrum-ltc-icons/icons_rc.py ./electrum_ltc/gui/qt/
+cp -R ./contrib/deterministic-build/electrum-game-locale/locale/ ./electrum_game/locale/
+cp    ./contrib/deterministic-build/electrum-game-icons/icons_rc.py ./electrum_game/gui/qt/
 
 
 info "Downloading libusb..."
@@ -90,11 +90,11 @@ done
 info "Building binary"
 pyinstaller --noconfirm --ascii --clean --name $VERSION contrib/build-osx/osx.spec || fail "Could not build binary"
 
-info "Adding litecoin URI types to Info.plist"
+info "Adding gamecredits URI types to Info.plist"
 plutil -insert 'CFBundleURLTypes' \
-	-xml '<array><dict> <key>CFBundleURLName</key> <string>litecoin</string> <key>CFBundleURLSchemes</key> <array><string>litecoin</string></array> </dict></array>' \
+	-xml '<array><dict> <key>CFBundleURLName</key> <string>gamecredits</string> <key>CFBundleURLSchemes</key> <array><string>gamecredits</string></array> </dict></array>' \
 	-- dist/$PACKAGE.app/Contents/Info.plist \
 	|| fail "Could not add keys to Info.plist. Make sure the program 'plutil' exists and is installed."
 
 info "Creating .DMG"
-hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum-ltc-$VERSION.dmg || fail "Could not create .DMG"
+hdiutil create -fs HFS+ -volname $PACKAGE -srcfolder dist/$PACKAGE.app dist/electrum-game-$VERSION.dmg || fail "Could not create .DMG"

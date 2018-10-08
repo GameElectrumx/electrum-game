@@ -1,6 +1,6 @@
 #!/bin/bash
 
-NAME_ROOT=electrum-ltc
+NAME_ROOT=electrum-game
 PYTHON_VERSION=3.6.6
 
 # These settings probably don't need any change
@@ -19,7 +19,7 @@ set -e
 mkdir -p tmp
 cd tmp
 
-pushd $WINEPREFIX/drive_c/electrum-ltc
+pushd $WINEPREFIX/drive_c/electrum-game
 
 # Load electrum-icons and electrum-locale for this release
 git submodule init
@@ -28,13 +28,13 @@ git submodule update
 VERSION=`git describe --tags --dirty --always`
 echo "Last commit: $VERSION"
 
-pushd ./contrib/deterministic-build/electrum-ltc-locale
+pushd ./contrib/deterministic-build/electrum-game-locale
 if ! which msgfmt > /dev/null 2>&1; then
     echo "Please install gettext"
     exit 1
 fi
 for i in ./locale/*; do
-    dir=$WINEPREFIX/drive_c/electrum-ltc/electrum_ltc/$i/LC_MESSAGES
+    dir=$WINEPREFIX/drive_c/electrum-game/electrum_game/$i/LC_MESSAGES
     mkdir -p $dir
     msgfmt --output-file=$dir/electrum.mo $i/electrum.po || true
 done
@@ -43,15 +43,15 @@ popd
 find -exec touch -d '2000-11-11T11:11:11+00:00' {} +
 popd
 
-cp $WINEPREFIX/drive_c/electrum-ltc/LICENCE .
-cp $WINEPREFIX/drive_c/electrum-ltc/contrib/deterministic-build/electrum-ltc-icons/icons_rc.py $WINEPREFIX/drive_c/electrum-ltc/electrum_ltc/gui/qt/
+cp $WINEPREFIX/drive_c/electrum-game/LICENCE .
+cp $WINEPREFIX/drive_c/electrum-game/contrib/deterministic-build/electrum-game-icons/icons_rc.py $WINEPREFIX/drive_c/electrum-game/electrum_game/gui/qt/
 
 # Install frozen dependencies
 $PYTHON -m pip install -r ../../deterministic-build/requirements.txt
 
 $PYTHON -m pip install -r ../../deterministic-build/requirements-hw.txt
 
-pushd $WINEPREFIX/drive_c/electrum-ltc
+pushd $WINEPREFIX/drive_c/electrum-game
 $PYTHON setup.py install
 popd
 
@@ -72,7 +72,7 @@ popd
 wine "$WINEPREFIX/drive_c/Program Files (x86)/NSIS/makensis.exe" /DPRODUCT_VERSION=$VERSION electrum.nsi
 
 cd dist
-mv electrum-ltc-setup.exe $NAME_ROOT-$VERSION-setup.exe
+mv electrum-game-setup.exe $NAME_ROOT-$VERSION-setup.exe
 cd ..
 
 echo "Done."

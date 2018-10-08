@@ -20,7 +20,7 @@ folder.
 2. Build image
 
     ```
-    $ sudo docker build --no-cache -t electrum-ltc-wine-builder-img contrib/build-wine/docker
+    $ sudo docker build --no-cache -t electrum-game-wine-builder-img contrib/build-wine/docker
     ```
 
     Note: see [this](https://stackoverflow.com/a/40516974/7499128) if having dns problems
@@ -30,11 +30,11 @@ folder.
     ```
     $ git checkout $REV
     $ sudo docker run \
-        --name electrum-ltc-wine-builder-cont \
-        -v $PWD:/opt/wine64/drive_c/electrum-ltc \
+        --name electrum-game-wine-builder-cont \
+        -v $PWD:/opt/wine64/drive_c/electrum-game \
         --rm \
-        --workdir /opt/wine64/drive_c/electrum-ltc/contrib/build-wine \
-        electrum-ltc-wine-builder-img \
+        --workdir /opt/wine64/drive_c/electrum-game/contrib/build-wine \
+        electrum-game-wine-builder-img \
         ./build.sh
     ```
 4. The generated binaries are in `./contrib/build-wine/dist`.
@@ -47,10 +47,10 @@ Note: the `setup` binary (NSIS installer) is not deterministic yet.
 Code Signing
 ============
 
-Electrum-LTC Windows builds are signed with a Microsoft Authenticode™ code signing
+Electrum-GAME Windows builds are signed with a Microsoft Authenticode™ code signing
 certificate in addition to the GPG-based signatures.
 
-The advantage of using Authenticode is that Electrum-LTC users won't receive a 
+The advantage of using Authenticode is that Electrum-GAME users won't receive a 
 Windows SmartScreen warning when starting it.
 
 The release signing procedure involves a signer (the holder of the
@@ -68,7 +68,7 @@ certificate/key) and one or multiple trusted verifiers:
 
 | Signer and verifiers:                                                                         |
 |-----------------------------------------------------------------------------------------------|
-| Upload signatures to 'electrum-ltc-signatures' repo, as `$version/$filename.$builder.asc`         |
+| Upload signatures to 'electrum-game-signatures' repo, as `$version/$filename.$builder.asc`         |
 
 
 

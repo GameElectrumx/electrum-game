@@ -1,7 +1,7 @@
 include LICENCE RELEASE-NOTES AUTHORS
 include README.rst
-include electrum-ltc.conf.sample
-include electrum-ltc.desktop
+include electrum-game.conf.sample
+include electrum-game.desktop
 include *.py
 include run_electrum
 include contrib/requirements/requirements.txt
@@ -11,8 +11,8 @@ recursive-include packages cacert.pem
 include icons.qrc
 graft icons
 
-graft electrum_ltc
-prune electrum_ltc/tests
+graft electrum_game
+prune electrum_game/tests
 
 global-exclude __pycache__
 global-exclude *.py[co]

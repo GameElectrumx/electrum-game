@@ -18,7 +18,7 @@ with open('contrib/requirements/requirements.txt') as f:
 with open('contrib/requirements/requirements-hw.txt') as f:
     requirements_hw = f.read().splitlines()
 
-version = imp.load_source('version', 'electrum_ltc/version.py')
+version = imp.load_source('version', 'electrum_game/version.py')
 
 if sys.version_info[:3] < (3, 6, 0):
     sys.exit("Error: Electrum requires Python version >= 3.6.0...")
@@ -39,8 +39,8 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         else:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum-ltc.desktop']),
-        (os.path.join(usr_share, icons_dirname), ['icons/electrum-ltc.png'])
+        (os.path.join(usr_share, 'applications/'), ['electrum-game.desktop']),
+        (os.path.join(usr_share, icons_dirname), ['icons/electrum-game.png'])
     ]
 
 extras_require = {
@@ -61,7 +61,7 @@ class CustomInstallCommand(install):
             pass
         else:
             try:
-                path = os.path.join(self.install_lib, "electrum_ltc/gui/qt/icons_rc.py")
+                path = os.path.join(self.install_lib, "electrum_game/gui/qt/icons_rc.py")
                 if not os.path.exists(path):
                     subprocess.call(["pyrcc5", "icons.qrc", "-o", path])
             except Exception as e:
@@ -69,35 +69,35 @@ class CustomInstallCommand(install):
 
 
 setup(
-    name="Electrum-LTC",
+    name="Electrum-GAME",
     version=version.ELECTRUM_VERSION,
     python_requires='>=3.6',
     install_requires=requirements,
     extras_require=extras_require,
     packages=[
-        'electrum_ltc',
-        'electrum_ltc.gui',
-        'electrum_ltc.gui.qt',
-        'electrum_ltc.plugins',
-    ] + [('electrum_ltc.plugins.'+pkg) for pkg in find_packages('electrum_ltc/plugins')],
+        'electrum_game',
+        'electrum_game.gui',
+        'electrum_game.gui.qt',
+        'electrum_game.plugins',
+    ] + [('electrum_game.plugins.'+pkg) for pkg in find_packages('electrum_game/plugins')],
     package_dir={
-        'electrum_ltc': 'electrum_ltc'
+        'electrum_game': 'electrum_game'
     },
     package_data={
         '': ['*.txt', '*.json', '*.ttf', '*.otf'],
-        'electrum_ltc': [
+        'electrum_game': [
             'wordlist/*.txt',
             'locale/*/LC_MESSAGES/electrum.mo',
         ],
     },
-    scripts=['electrum_ltc/electrum-ltc'],
+    scripts=['electrum_game/electrum-game'],
     data_files=data_files,
-    description="Lightweight Litecoin Wallet",
+    description="Lightweight GameCredits Wallet",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
-    url="https://electrum-ltc.org",
-    long_description="""Lightweight Litecoin Wallet""",
+    url="https://electrum-game.org",
+    long_description="""Lightweight GameCredits Wallet""",
     cmdclass={
         'install': CustomInstallCommand,
     },

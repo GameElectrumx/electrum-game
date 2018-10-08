@@ -1,0 +1,19 @@
+{
+    "electrum-game.bysh.me": {
+        "pruning": "-",
+        "s": "51002",
+        "t": "51001",
+        "version": "1.2"
+    },
+    "electrum.game.xurious.com": {
+        "pruning": "-",
+        "s": "51002",
+        "t": "51001",
+        "version": "1.2"
+    },
+    "electrumx.kekku.li": {
+        "pruning": "-",
+        "s": "51003",
+        "version": "1.2"
+    }
+}
