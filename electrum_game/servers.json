@@ -1,11 +1,11 @@
 {
-    "104.161.79.244": {
+    "electrum.gamecredits.network": {
         "pruning": "-",
         "t": "50001",
         "s": "50002",
         "version": "1.2"
     },
-    "electrum.gamecredits.network": {
+    "electrum2.gamecredits.network": {
         "pruning": "-",
         "t": "50001",
         "s": "50002",
