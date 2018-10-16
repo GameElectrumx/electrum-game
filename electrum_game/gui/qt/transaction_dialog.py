@@ -39,7 +39,7 @@ from electrum_game.i18n import _
 from electrum_game.plugin import run_hook
 from electrum_game import simple_config
 from electrum_game.util import bfh
-from electrum_ltc.transaction import SerializationError
+from electrum_game.transaction import SerializationError
 
 from .util import *
 
