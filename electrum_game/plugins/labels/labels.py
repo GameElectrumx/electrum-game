@@ -6,17 +6,10 @@ import traceback
 
 import base64
 
-<<<<<<< HEAD:electrum_game/plugins/labels/labels.py
 from electrum_game.plugin import BasePlugin, hook
 from electrum_game.crypto import aes_encrypt_with_iv, aes_decrypt_with_iv
 from electrum_game.i18n import _
-from electrum_game.util import aiosafe, make_aiohttp_session
-=======
-from electrum_ltc.plugin import BasePlugin, hook
-from electrum_ltc.crypto import aes_encrypt_with_iv, aes_decrypt_with_iv
-from electrum_ltc.i18n import _
-from electrum_ltc.util import log_exceptions, ignore_exceptions, make_aiohttp_session
->>>>>>> pooler/master:electrum_ltc/plugins/labels/labels.py
+from electrum_game.util import log_exceptions, ignore_exceptions, make_aiohttp_session
 
 class LabelsPlugin(BasePlugin):
 

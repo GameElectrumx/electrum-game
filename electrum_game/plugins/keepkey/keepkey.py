@@ -2,11 +2,9 @@ from binascii import hexlify, unhexlify
 import traceback
 import sys
 
-<<<<<<< HEAD:electrum_game/plugins/keepkey/keepkey.py
 from electrum_game.util import bfh, bh2u, UserCancelled
-from electrum_game.bitcoin import (b58_address_to_hash160, xpub_from_pubkey,
-                                  TYPE_ADDRESS, TYPE_SCRIPT,
-                                  is_segwit_address)
+from electrum_game.bitcoin import (xpub_from_pubkey, deserialize_xpub,
+                                  TYPE_ADDRESS, TYPE_SCRIPT)
 from electrum_game import constants
 from electrum_game.i18n import _
 from electrum_game.plugin import BasePlugin
@@ -14,18 +12,6 @@ from electrum_game.transaction import deserialize, Transaction
 from electrum_game.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
 from electrum_game.wallet import Standard_Wallet
 from electrum_game.base_wizard import ScriptTypeNotSupported
-=======
-from electrum_ltc.util import bfh, bh2u, UserCancelled
-from electrum_ltc.bitcoin import (xpub_from_pubkey, deserialize_xpub,
-                                  TYPE_ADDRESS, TYPE_SCRIPT)
-from electrum_ltc import constants
-from electrum_ltc.i18n import _
-from electrum_ltc.plugin import BasePlugin
-from electrum_ltc.transaction import deserialize, Transaction
-from electrum_ltc.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
-from electrum_ltc.wallet import Standard_Wallet
-from electrum_ltc.base_wizard import ScriptTypeNotSupported
->>>>>>> pooler/master:electrum_ltc/plugins/keepkey/keepkey.py
 
 from ..hw_wallet import HW_PluginBase
 from ..hw_wallet.plugin import is_any_tx_output_on_change_branch, trezor_validate_op_return_output_and_get_data

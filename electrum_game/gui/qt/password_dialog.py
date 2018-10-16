@@ -29,20 +29,10 @@ import math
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-<<<<<<< HEAD:electrum_game/gui/qt/password_dialog.py
 from electrum_game.i18n import _
-=======
-
-from electrum_ltc.i18n import _
-from electrum_ltc.plugin import run_hook
-
->>>>>>> pooler/master:electrum_ltc/gui/qt/password_dialog.py
-from .util import *
-
-<<<<<<< HEAD:electrum_game/gui/qt/password_dialog.py
 from electrum_game.plugin import run_hook
-=======
->>>>>>> pooler/master:electrum_ltc/gui/qt/password_dialog.py
+
+from .util import *
 
 def check_password_strength(password):
 

@@ -54,16 +54,10 @@ from electrum_game.util import (format_time, format_satoshis, format_fee_satoshi
                                base_units, base_units_list, base_unit_name_to_decimal_point,
                                decimal_point_to_base_unit_name, quantize_feerate,
                                UnknownBaseUnit, DECIMAL_POINT_DEFAULT)
-<<<<<<< HEAD:electrum_game/gui/qt/main_window.py
 from electrum_game.transaction import Transaction, TxOutput
 from electrum_game.address_synchronizer import AddTransactionException
 from electrum_game.wallet import Multisig_Wallet, CannotBumpFee
-=======
-from electrum_ltc.transaction import Transaction, TxOutput
-from electrum_ltc.address_synchronizer import AddTransactionException
-from electrum_ltc.wallet import Multisig_Wallet, CannotBumpFee
-from electrum_ltc.version import ELECTRUM_VERSION
->>>>>>> pooler/master:electrum_ltc/gui/qt/main_window.py
+from electrum_game.version import ELECTRUM_VERSION
 
 from .exception_window import Exception_Hook
 from .amountedit import AmountEdit, BTCAmountEdit, MyLineEdit, FeerateEdit
@@ -405,13 +399,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.setGeometry(100, 100, 840, 400)
 
     def watching_only_changed(self):
-<<<<<<< HEAD:electrum_game/gui/qt/main_window.py
         name = "Electrum-GAME Testnet" if constants.net.TESTNET else "Electrum-GAME"
         title = '%s %s  -  %s' % (name, self.wallet.electrum_version,
-=======
-        name = "Electrum-LTC Testnet" if constants.net.TESTNET else "Electrum-LTC"
-        title = '%s %s  -  %s' % (name, ELECTRUM_VERSION,
->>>>>>> pooler/master:electrum_ltc/gui/qt/main_window.py
                                         self.wallet.basename())
         extra = [self.wallet.storage.get('wallet_type', '?')]
         if self.wallet.is_watching_only():
@@ -595,15 +584,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
-<<<<<<< HEAD:electrum_game/gui/qt/main_window.py
         QMessageBox.about(self, "Electrum-GAME",
                           (_("Version")+" %s" % self.wallet.electrum_version + "\n\n" +
                            _("Electrum's focus is speed, with low resource usage and simplifying GameCredits.") + " " +
-=======
-        QMessageBox.about(self, "Electrum-LTC",
-                          (_("Version")+" %s" % ELECTRUM_VERSION + "\n\n" +
-                           _("Electrum's focus is speed, with low resource usage and simplifying Litecoin.") + " " +
->>>>>>> pooler/master:electrum_ltc/gui/qt/main_window.py
                            _("You do not need to perform regular backups, because your wallet can be "
                               "recovered from a secret phrase that you can memorize or write on paper.") + " " +
                            _("Startup times are instant because it operates in conjunction with high-performance "

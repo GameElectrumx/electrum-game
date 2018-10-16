@@ -82,12 +82,7 @@ def hash_header(header: dict) -> str:
 def pow_hash_header(header):
     return hash_encode(getPoWHash(bfh(serialize_header(header))))
 
-<<<<<<< HEAD:electrum_game/blockchain.py
-blockchains = {}
-=======
-
 blockchains = {}  # type: Dict[int, Blockchain]
->>>>>>> pooler/master:electrum_ltc/blockchain.py
 blockchains_lock = threading.Lock()
 
 

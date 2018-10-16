@@ -65,31 +65,16 @@ if not is_android:
     check_imports()
 
 
-<<<<<<< HEAD
-from electrum_game import bitcoin, util
+from electrum_game import util
 from electrum_game import constants
-from electrum_game import SimpleConfig, Network
-from electrum_game.wallet import Wallet, Imported_Wallet
-from electrum_game import bitcoin, util, constants
+from electrum_game import SimpleConfig
+from electrum_game.wallet import Wallet
 from electrum_game.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
 from electrum_game.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
 from electrum_game.util import set_verbosity, InvalidPassword
 from electrum_game.commands import get_parser, known_commands, Commands, config_variables
 from electrum_game import daemon
 from electrum_game import keystore
-from electrum_game.mnemonic import Mnemonic
-=======
-from electrum_ltc import util
-from electrum_ltc import constants
-from electrum_ltc import SimpleConfig
-from electrum_ltc.wallet import Wallet
-from electrum_ltc.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
-from electrum_ltc.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
-from electrum_ltc.util import set_verbosity, InvalidPassword
-from electrum_ltc.commands import get_parser, known_commands, Commands, config_variables
-from electrum_ltc import daemon
-from electrum_ltc import keystore
->>>>>>> pooler/master
 
 # get password routine
 def prompt_password(prompt, confirm=True):
@@ -370,13 +355,8 @@ if __name__ == '__main__':
                 init_plugins(config, 'cmdline')
                 d = daemon.Daemon(config, fd)
                 if config.get('websocket_server'):
-<<<<<<< HEAD
                     from electrum_game import websockets
-                    websockets.WebSocketServer(config, d.network).start()
-=======
-                    from electrum_ltc import websockets
                     websockets.WebSocketServer(config, d.network)
->>>>>>> pooler/master
                 if config.get('requests_dir'):
                     path = os.path.join(config.get('requests_dir'), 'index.html')
                     if not os.path.exists(path):

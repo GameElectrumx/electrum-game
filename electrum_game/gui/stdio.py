@@ -1,23 +1,13 @@
 from decimal import Decimal
-<<<<<<< HEAD:electrum_game/gui/stdio.py
-_ = lambda x:x
-#from i18n import _
+import getpass
+import datetime
+
 from electrum_game import WalletStorage, Wallet
 from electrum_game.util import format_satoshis, set_verbosity
 from electrum_game.bitcoin import is_address, COIN, TYPE_ADDRESS
 from electrum_game.transaction import TxOutput
-import getpass, datetime
-=======
-import getpass
-import datetime
-
-from electrum_ltc import WalletStorage, Wallet
-from electrum_ltc.util import format_satoshis, set_verbosity
-from electrum_ltc.bitcoin import is_address, COIN, TYPE_ADDRESS
-from electrum_ltc.transaction import TxOutput
 
 _ = lambda x:x  # i18n
->>>>>>> pooler/master:electrum_ltc/gui/stdio.py
 
 # minimal fdisk like gui for console usage
 # written by rofl0r, with some bits stolen from the text gui (ncurses)

@@ -26,17 +26,11 @@
 import re
 from decimal import Decimal
 
-<<<<<<< HEAD:electrum_game/gui/qt/paytoedit.py
+from PyQt5.QtGui import *
+
 from electrum_game import bitcoin
 from electrum_game.util import bfh
 from electrum_game.transaction import TxOutput
-=======
-from PyQt5.QtGui import *
-
-from electrum_ltc import bitcoin
-from electrum_ltc.util import bfh
-from electrum_ltc.transaction import TxOutput
->>>>>>> pooler/master:electrum_ltc/gui/qt/paytoedit.py
 
 from .qrtextedit import ScanQRTextEdit
 from .completion_text_edit import CompletionTextEdit

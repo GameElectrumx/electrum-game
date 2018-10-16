@@ -25,17 +25,10 @@ with open('contrib/requirements/requirements.txt') as f:
 with open('contrib/requirements/requirements-hw.txt') as f:
     requirements_hw = f.read().splitlines()
 
-<<<<<<< HEAD
-version = imp.load_source('version', 'electrum_game/version.py')
-
-if sys.version_info[:3] < (3, 6, 0):
-    sys.exit("Error: Electrum requires Python version >= 3.6.0...")
-=======
 # load version.py; needlessly complicated alternative to "imp.load_source":
-version_spec = importlib.util.spec_from_file_location('version', 'electrum_ltc/version.py')
+version_spec = importlib.util.spec_from_file_location('version', 'electrum_game/version.py')
 version_module = version = importlib.util.module_from_spec(version_spec)
 version_spec.loader.exec_module(version_module)
->>>>>>> pooler/master
 
 data_files = []
 

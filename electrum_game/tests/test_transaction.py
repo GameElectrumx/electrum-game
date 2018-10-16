@@ -1,15 +1,8 @@
-<<<<<<< HEAD:electrum_game/tests/test_transaction.py
 from electrum_game import transaction
+from electrum_game.transaction import TxOutputForUI
 from electrum_game.bitcoin import TYPE_ADDRESS
 from electrum_game.keystore import xpubkey_to_address
 from electrum_game.util import bh2u, bfh
-=======
-from electrum_ltc import transaction
-from electrum_ltc.transaction import TxOutputForUI
-from electrum_ltc.bitcoin import TYPE_ADDRESS
-from electrum_ltc.keystore import xpubkey_to_address
-from electrum_ltc.util import bh2u, bfh
->>>>>>> pooler/master:electrum_ltc/tests/test_transaction.py
 
 from . import SequentialTestCase, TestCaseForTestnet
 from .test_bitcoin import needs_test_with_all_ecc_implementations

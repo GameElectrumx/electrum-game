@@ -1,11 +1,7 @@
 import unittest
 from decimal import Decimal
 
-<<<<<<< HEAD:electrum_game/tests/test_commands.py
-from electrum_game.commands import Commands
-=======
-from electrum_ltc.commands import Commands, eval_bool
->>>>>>> pooler/master:electrum_ltc/tests/test_commands.py
+from electrum_game.commands import Commands, eval_bool
 
 
 class TestCommands(unittest.TestCase):

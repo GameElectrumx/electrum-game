@@ -7,7 +7,6 @@ import traceback
 from decimal import Decimal
 import threading
 
-<<<<<<< HEAD:electrum_game/gui/kivy/main_window.py
 from electrum_game.bitcoin import TYPE_ADDRESS
 from electrum_game.storage import WalletStorage
 from electrum_game.wallet import Wallet
@@ -17,18 +16,7 @@ from electrum_game.plugin import run_hook
 from electrum_game.util import format_satoshis, format_satoshis_plain
 from electrum_game.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 from electrum_game import blockchain
-=======
-from electrum_ltc.bitcoin import TYPE_ADDRESS
-from electrum_ltc.storage import WalletStorage
-from electrum_ltc.wallet import Wallet
-from electrum_ltc.paymentrequest import InvoiceStore
-from electrum_ltc.util import profiler, InvalidPassword
-from electrum_ltc.plugin import run_hook
-from electrum_ltc.util import format_satoshis, format_satoshis_plain
-from electrum_ltc.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
-from electrum_ltc import blockchain
-from electrum_ltc.network import Network
->>>>>>> pooler/master:electrum_ltc/gui/kivy/main_window.py
+from electrum_game.network import Network
 from .i18n import _
 
 from kivy.app import App

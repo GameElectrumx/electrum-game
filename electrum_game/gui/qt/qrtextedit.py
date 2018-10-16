@@ -1,15 +1,9 @@
-<<<<<<< HEAD:electrum_game/gui/qt/qrtextedit.py
-
-from electrum_game.i18n import _
-from electrum_game.plugin import run_hook
-=======
->>>>>>> pooler/master:electrum_ltc/gui/qt/qrtextedit.py
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QFileDialog
 
-from electrum_ltc.i18n import _
-from electrum_ltc.plugin import run_hook
+from electrum_game.i18n import _
+from electrum_game.plugin import run_hook
 
 from .util import ButtonsTextEdit, MessageBoxMixin, ColorScheme
 

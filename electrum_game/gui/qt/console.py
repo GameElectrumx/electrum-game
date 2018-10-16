@@ -10,14 +10,9 @@ import platform
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
-<<<<<<< HEAD:electrum_game/gui/qt/console.py
+
 from electrum_game import util
 from electrum_game.i18n import _
-=======
-
-from electrum_ltc import util
-from electrum_ltc.i18n import _
->>>>>>> pooler/master:electrum_ltc/gui/qt/console.py
 
 
 if platform.system() == 'Windows':

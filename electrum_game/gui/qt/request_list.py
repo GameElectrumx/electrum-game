@@ -23,25 +23,15 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-<<<<<<< HEAD:electrum_game/gui/qt/request_list.py
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import QTreeWidgetItem, QMenu
+
 from electrum_game.i18n import _
 from electrum_game.util import format_time, age
 from electrum_game.plugin import run_hook
 from electrum_game.paymentrequest import PR_UNKNOWN
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import QTreeWidgetItem, QMenu
-=======
-from PyQt5.QtGui import *
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import QTreeWidgetItem, QMenu
 
-from electrum_ltc.i18n import _
-from electrum_ltc.util import format_time, age
-from electrum_ltc.plugin import run_hook
-from electrum_ltc.paymentrequest import PR_UNKNOWN
-
->>>>>>> pooler/master:electrum_ltc/gui/qt/request_list.py
 from .util import MyTreeWidget, pr_tooltips, pr_icons
 
 

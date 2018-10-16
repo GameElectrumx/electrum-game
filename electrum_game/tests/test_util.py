@@ -1,10 +1,6 @@
-<<<<<<< HEAD:electrum_game/tests/test_util.py
-from electrum_game.util import format_satoshis, parse_URI
-=======
 from decimal import Decimal
 
-from electrum_ltc.util import format_satoshis, format_fee_satoshis, parse_URI
->>>>>>> pooler/master:electrum_ltc/tests/test_util.py
+from electrum_game.util import format_satoshis, format_fee_satoshis, parse_URI
 
 from . import SequentialTestCase
 

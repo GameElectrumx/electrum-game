@@ -38,25 +38,12 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import PyQt5.QtCore as QtCore
 
-<<<<<<< HEAD:electrum_game/gui/qt/__init__.py
 from electrum_game.i18n import _, set_language
 from electrum_game.plugin import run_hook
 from electrum_game.storage import WalletStorage
 from electrum_game.base_wizard import GoBack
-# from electrum_game.synchronizer import Synchronizer
-# from electrum_game.verifier import SPV
-# from electrum_game.util import DebugMem
 from electrum_game.util import (UserCancelled, PrintError,
                                WalletFileException, BitcoinException)
-# from electrum_game.wallet import Abstract_Wallet
-=======
-from electrum_ltc.i18n import _, set_language
-from electrum_ltc.plugin import run_hook
-from electrum_ltc.storage import WalletStorage
-from electrum_ltc.base_wizard import GoBack
-from electrum_ltc.util import (UserCancelled, PrintError,
-                               WalletFileException, BitcoinException)
->>>>>>> pooler/master:electrum_ltc/gui/qt/__init__.py
 
 from .installwizard import InstallWizard
 

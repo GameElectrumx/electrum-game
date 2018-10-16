@@ -7,16 +7,8 @@ import PyQt5.QtGui as QtGui
 from PyQt5.QtWidgets import (
     QApplication, QVBoxLayout, QTextEdit, QHBoxLayout, QPushButton, QWidget)
 
-<<<<<<< HEAD:electrum_game/gui/qt/qrcodewidget.py
-import os
-import qrcode
-
 import electrum_game
 from electrum_game.i18n import _
-=======
-import electrum_ltc
-from electrum_ltc.i18n import _
->>>>>>> pooler/master:electrum_ltc/gui/qt/qrcodewidget.py
 from .util import WindowModalDialog
 
 

@@ -30,18 +30,11 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 import PyQt5.QtCore as QtCore
 
-<<<<<<< HEAD:electrum_game/gui/qt/network_dialog.py
 from electrum_game.i18n import _
 from electrum_game import constants, blockchain
 from electrum_game.util import print_error
 from electrum_game.interface import serialize_server, deserialize_server
-=======
-from electrum_ltc.i18n import _
-from electrum_ltc import constants, blockchain
-from electrum_ltc.util import print_error
-from electrum_ltc.interface import serialize_server, deserialize_server
-from electrum_ltc.network import Network
->>>>>>> pooler/master:electrum_ltc/gui/qt/network_dialog.py
+from electrum_game.network import Network
 
 from .util import *
 
