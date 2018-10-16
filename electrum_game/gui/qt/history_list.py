@@ -27,10 +27,18 @@ import webbrowser
 import datetime
 from datetime import date
 
+<<<<<<< HEAD:electrum_game/gui/qt/history_list.py
 from electrum_game.address_synchronizer import TX_HEIGHT_LOCAL
 from .util import *
 from electrum_game.i18n import _
 from electrum_game.util import block_explorer_URL, profiler, print_error, TxMinedStatus
+=======
+from electrum_ltc.address_synchronizer import TX_HEIGHT_LOCAL
+from electrum_ltc.i18n import _
+from electrum_ltc.util import block_explorer_URL, profiler, print_error, TxMinedStatus
+>>>>>>> pooler/master:electrum_ltc/gui/qt/history_list.py
+
+from .util import *
 
 try:
     from electrum_game.plot import plot_history, NothingToPlotException

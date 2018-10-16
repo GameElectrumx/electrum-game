@@ -1,6 +1,4 @@
 import asyncio
-import aiohttp
-from aiohttp_socks import SocksConnector, SocksVer
 from datetime import datetime
 import inspect
 import sys
@@ -12,15 +10,17 @@ import decimal
 from decimal import Decimal
 import concurrent.futures
 import traceback
+from typing import Sequence
 
 from .bitcoin import COIN
 from .i18n import _
-from .util import PrintError, ThreadJob, make_dir, aiosafe
+from .util import PrintError, ThreadJob, make_dir, log_exceptions
 from .util import make_aiohttp_session
 from .network import Network
 
 # See https://en.wikipedia.org/wiki/ISO_4217
 CCY_PRECISIONS = {'BTC': 8}
+
 
 class ExchangeBase(PrintError):
 
@@ -53,14 +53,14 @@ class ExchangeBase(PrintError):
     def name(self):
         return self.__class__.__name__
 
-    @aiosafe
+    @log_exceptions
     async def update_safe(self, ccy):
         try:
             self.print_error("getting fx quotes for", ccy)
             self.quotes = await self.get_rates(ccy)
             self.print_error("received fx quotes")
         except BaseException as e:
-            self.print_error("failed fx quotes:", e)
+            self.print_error("failed fx quotes:", repr(e))
             self.quotes = {}
         self.on_quotes()
 
@@ -84,7 +84,7 @@ class ExchangeBase(PrintError):
             self.on_history()
         return h
 
-    @aiosafe
+    @log_exceptions
     async def get_historical_rates_safe(self, ccy, cache_dir):
         try:
             self.print_error("requesting fx history for", ccy)
@@ -202,12 +202,14 @@ class FxThread(ThreadJob):
     def set_proxy(self, trigger_name, *args):
         self._trigger.set()
 
-    def get_currencies(self, h):
-        d = get_exchanges_by_ccy(h)
+    @staticmethod
+    def get_currencies(history: bool) -> Sequence[str]:
+        d = get_exchanges_by_ccy(history)
         return sorted(d.keys())
 
-    def get_exchanges_by_ccy(self, ccy, h):
-        d = get_exchanges_by_ccy(h)
+    @staticmethod
+    def get_exchanges_by_ccy(ccy: str, history: bool) -> Sequence[str]:
+        d = get_exchanges_by_ccy(history)
         return d.get(ccy, [])
 
     def ccy_amount_str(self, amount, commas):

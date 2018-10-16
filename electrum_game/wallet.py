@@ -87,7 +87,7 @@ def append_utxos_to_inputs(inputs, network, pubkey, txin_type, imax):
         scripthash = bitcoin.script_to_scripthash(script)
         address = '(pubkey)'
 
-    u = network.listunspent_for_scripthash(scripthash)
+    u = network.run_from_another_thread(network.listunspent_for_scripthash(scripthash))
     for item in u:
         if len(inputs) >= imax:
             break
@@ -143,7 +143,6 @@ def sweep(privkeys, network, config, recipient, fee=None, imax=100):
     locktime = network.get_local_height()
 
     tx = Transaction.from_io(inputs, outputs, locktime=locktime)
-    tx.BIP_LI01_sort()
     tx.set_rbf(True)
     tx.sign(keypairs)
     return tx
@@ -168,7 +167,6 @@ class Abstract_Wallet(AddressSynchronizer):
     def __init__(self, storage):
         AddressSynchronizer.__init__(self, storage)
 
-        self.electrum_version = ELECTRUM_VERSION
         # saved fields
         self.use_change            = storage.get('use_change', True)
         self.multiple_change       = storage.get('multiple_change', False)
@@ -413,7 +411,8 @@ class Abstract_Wallet(AddressSynchronizer):
             if show_addresses:
                 tx = self.transactions.get(tx_hash)
                 item['inputs'] = list(map(lambda x: dict((k, x[k]) for k in ('prevout_hash', 'prevout_n')), tx.inputs()))
-                item['outputs'] = list(map(lambda x:{'address':x[0], 'value':Satoshis(x[1])}, tx.get_outputs()))
+                item['outputs'] = list(map(lambda x:{'address':x.address, 'value':Satoshis(x.value)},
+                                           tx.get_outputs_for_UI()))
             # value may be None if wallet is not fully synchronized
             if value is None:
                 continue
@@ -608,8 +607,6 @@ class Abstract_Wallet(AddressSynchronizer):
             outputs[i_max] = outputs[i_max]._replace(value=amount)
             tx = Transaction.from_io(inputs, outputs[:])
 
-        # Sort the inputs and outputs deterministically
-        tx.BIP_LI01_sort()
         # Timelock tx to current height.
         tx.locktime = self.get_local_height()
         run_hook('make_unsigned_transaction', self, tx)
@@ -714,7 +711,6 @@ class Abstract_Wallet(AddressSynchronizer):
             raise CannotBumpFee(_('Cannot bump fee') + ': ' + _('could not find suitable outputs'))
         locktime = self.get_local_height()
         tx_new = Transaction.from_io(inputs, outputs, locktime=locktime)
-        tx_new.BIP_LI01_sort()
         return tx_new
 
     def cpfp(self, tx, fee):
@@ -733,7 +729,6 @@ class Abstract_Wallet(AddressSynchronizer):
         inputs = [item]
         outputs = [TxOutput(TYPE_ADDRESS, address, value - fee)]
         locktime = self.get_local_height()
-        # note: no need to call tx.BIP_LI01_sort() here - single input/output
         return Transaction.from_io(inputs, outputs, locktime=locktime)
 
     def add_input_sig_info(self, txin, address):

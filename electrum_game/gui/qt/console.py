@@ -1,13 +1,23 @@
 
 # source: http://stackoverflow.com/questions/2758159/how-to-embed-a-python-interpreter-in-a-pyqt-widget
 
-import sys, os, re
-import traceback, platform
+import sys
+import os
+import re
+import traceback
+import platform
+
 from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
+<<<<<<< HEAD:electrum_game/gui/qt/console.py
 from electrum_game import util
 from electrum_game.i18n import _
+=======
+
+from electrum_ltc import util
+from electrum_ltc.i18n import _
+>>>>>>> pooler/master:electrum_ltc/gui/qt/console.py
 
 
 if platform.system() == 'Windows':
@@ -72,8 +82,9 @@ class Console(QtWidgets.QPlainTextEdit):
         self.messageOverlay = OverlayLabel(warning_text, self)
 
     def resizeEvent(self, e):
-        self.messageOverlay.on_resize(self.width() - self.verticalScrollBar().width())
-
+        super().resizeEvent(e)
+        vertical_scrollbar_width = self.verticalScrollBar().width() * self.verticalScrollBar().isVisible()
+        self.messageOverlay.on_resize(self.width() - vertical_scrollbar_width)
 
     def set_json(self, b):
         self.is_json = b

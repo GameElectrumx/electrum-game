@@ -1,4 +1,5 @@
 from decimal import Decimal
+<<<<<<< HEAD:electrum_game/gui/stdio.py
 _ = lambda x:x
 #from i18n import _
 from electrum_game import WalletStorage, Wallet
@@ -6,9 +7,21 @@ from electrum_game.util import format_satoshis, set_verbosity
 from electrum_game.bitcoin import is_address, COIN, TYPE_ADDRESS
 from electrum_game.transaction import TxOutput
 import getpass, datetime
+=======
+import getpass
+import datetime
+
+from electrum_ltc import WalletStorage, Wallet
+from electrum_ltc.util import format_satoshis, set_verbosity
+from electrum_ltc.bitcoin import is_address, COIN, TYPE_ADDRESS
+from electrum_ltc.transaction import TxOutput
+
+_ = lambda x:x  # i18n
+>>>>>>> pooler/master:electrum_ltc/gui/stdio.py
 
 # minimal fdisk like gui for console usage
 # written by rofl0r, with some bits stolen from the text gui (ncurses)
+
 
 class ElectrumGui:
 
@@ -200,14 +213,14 @@ class ElectrumGui:
             self.wallet.labels[tx.txid()] = self.str_description
 
         print(_("Please wait..."))
-        status, msg = self.network.broadcast_transaction_from_non_network_thread(tx)
-
-        if status:
+        try:
+            self.network.run_from_another_thread(self.network.broadcast_transaction(tx))
+        except Exception as e:
+            print(repr(e))
+        else:
             print(_('Payment sent.'))
             #self.do_clear()
             #self.update_contacts_tab()
-        else:
-            print(_('Error'))
 
     def network_dialog(self):
         print("use 'electrum-game setconfig server/proxy' to change your network settings")

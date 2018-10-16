@@ -22,8 +22,15 @@
 # ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+<<<<<<< HEAD:electrum_game/gui/qt/utxo_list.py
 from .util import *
 from electrum_game.i18n import _
+=======
+
+from electrum_ltc.i18n import _
+>>>>>>> pooler/master:electrum_ltc/gui/qt/utxo_list.py
+
+from .util import *
 
 
 class UTXOList(MyTreeWidget):

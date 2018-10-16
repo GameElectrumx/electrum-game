@@ -23,13 +23,20 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from PyQt5.QtGui import *
 import re
 from decimal import Decimal
 
+<<<<<<< HEAD:electrum_game/gui/qt/paytoedit.py
 from electrum_game import bitcoin
 from electrum_game.util import bfh
 from electrum_game.transaction import TxOutput
+=======
+from PyQt5.QtGui import *
+
+from electrum_ltc import bitcoin
+from electrum_ltc.util import bfh
+from electrum_ltc.transaction import TxOutput
+>>>>>>> pooler/master:electrum_ltc/gui/qt/paytoedit.py
 
 from .qrtextedit import ScanQRTextEdit
 from .completion_text_edit import CompletionTextEdit
@@ -39,6 +46,7 @@ RE_ALIAS = '(.*?)\s*\<([0-9A-Za-z]{1,})\>'
 
 frozen_style = "QWidget { background-color:none; border:none;}"
 normal_style = "QPlainTextEdit { }"
+
 
 class PayToEdit(CompletionTextEdit, ScanQRTextEdit):
 

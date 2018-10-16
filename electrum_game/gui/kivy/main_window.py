@@ -7,6 +7,7 @@ import traceback
 from decimal import Decimal
 import threading
 
+<<<<<<< HEAD:electrum_game/gui/kivy/main_window.py
 from electrum_game.bitcoin import TYPE_ADDRESS
 from electrum_game.storage import WalletStorage
 from electrum_game.wallet import Wallet
@@ -16,6 +17,18 @@ from electrum_game.plugin import run_hook
 from electrum_game.util import format_satoshis, format_satoshis_plain
 from electrum_game.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 from electrum_game import blockchain
+=======
+from electrum_ltc.bitcoin import TYPE_ADDRESS
+from electrum_ltc.storage import WalletStorage
+from electrum_ltc.wallet import Wallet
+from electrum_ltc.paymentrequest import InvoiceStore
+from electrum_ltc.util import profiler, InvalidPassword
+from electrum_ltc.plugin import run_hook
+from electrum_ltc.util import format_satoshis, format_satoshis_plain
+from electrum_ltc.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from electrum_ltc import blockchain
+from electrum_ltc.network import Network
+>>>>>>> pooler/master:electrum_ltc/gui/kivy/main_window.py
 from .i18n import _
 
 from kivy.app import App
@@ -96,7 +109,7 @@ class ElectrumWindow(App):
     def on_auto_connect(self, instance, x):
         net_params = self.network.get_parameters()
         net_params = net_params._replace(auto_connect=self.auto_connect)
-        self.network.set_parameters(net_params)
+        self.network.run_from_another_thread(self.network.set_parameters(net_params))
     def toggle_auto_connect(self, x):
         self.auto_connect = not self.auto_connect
 
@@ -116,9 +129,10 @@ class ElectrumWindow(App):
         from .uix.dialogs.choice_dialog import ChoiceDialog
         chains = self.network.get_blockchains()
         def cb(name):
-            for index, b in blockchain.blockchains.items():
+            with blockchain.blockchains_lock: blockchain_items = list(blockchain.blockchains.items())
+            for index, b in blockchain_items:
                 if name == b.get_name():
-                    self.network.follow_chain(index)
+                    self.network.run_from_another_thread(self.network.follow_chain_given_id(index))
         names = [blockchain.blockchains[b].get_name() for b in chains]
         if len(names) > 1:
             cur_chain = self.network.blockchain().get_name()
@@ -265,7 +279,7 @@ class ElectrumWindow(App):
         title = _('Electrum-GAME App')
         self.electrum_config = config = kwargs.get('config', None)
         self.language = config.get('language', 'en')
-        self.network = network = kwargs.get('network', None)
+        self.network = network = kwargs.get('network', None)  # type: Network
         if self.network:
             self.num_blocks = self.network.get_local_height()
             self.num_nodes = len(self.network.get_interfaces())
@@ -662,7 +676,7 @@ class ElectrumWindow(App):
         self.num_nodes = len(self.network.get_interfaces())
         self.num_chains = len(self.network.get_blockchains())
         chain = self.network.blockchain()
-        self.blockchain_forkpoint = chain.get_forkpoint()
+        self.blockchain_forkpoint = chain.get_max_forkpoint()
         self.blockchain_name = chain.get_name()
         interface = self.network.interface
         if interface:
@@ -708,7 +722,7 @@ class ElectrumWindow(App):
             status = _("Offline")
         elif self.network.is_connected():
             server_height = self.network.get_server_height()
-            server_lag = self.network.get_local_height() - server_height
+            server_lag = self.num_blocks - server_height
             if not self.wallet.up_to_date or server_height == 0:
                 status = _("Synchronizing...")
             elif server_lag > 1:
@@ -885,8 +899,14 @@ class ElectrumWindow(App):
         Clock.schedule_once(lambda dt: on_success(tx))
 
     def _broadcast_thread(self, tx, on_complete):
-        ok, txid = self.network.broadcast_transaction_from_non_network_thread(tx)
-        Clock.schedule_once(lambda dt: on_complete(ok, txid))
+
+        try:
+            self.network.run_from_another_thread(self.network.broadcast_transaction(tx))
+        except Exception as e:
+            ok, msg = False, repr(e)
+        else:
+            ok, msg = True, tx.txid()
+        Clock.schedule_once(lambda dt: on_complete(ok, msg))
 
     def broadcast(self, tx, pr=None):
         def on_complete(ok, msg):

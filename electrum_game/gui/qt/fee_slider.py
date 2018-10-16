@@ -1,9 +1,15 @@
+<<<<<<< HEAD:electrum_game/gui/qt/fee_slider.py
 from electrum_game.i18n import _
+=======
+import threading
+
+>>>>>>> pooler/master:electrum_ltc/gui/qt/fee_slider.py
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import QSlider, QToolTip
 
-import threading
+from electrum_ltc.i18n import _
+
 
 class FeeSlider(QSlider):
 
