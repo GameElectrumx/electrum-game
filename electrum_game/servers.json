@@ -16,5 +16,11 @@
         "t": "50001",
         "s": "50002",
         "version": "1.2"
+    },
+    "emdje-electrum.ddns.net": {
+        "pruning": "-",
+        "t": "50001",
+        "s": "50002",
+        "version": "1.2"
     }
 }
